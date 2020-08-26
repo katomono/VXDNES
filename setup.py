@@ -1,4 +1,4 @@
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
@@ -105,6 +105,7 @@ setup(
     url='https://github.com/pybind/python_example',
     description='A test project using pybind11',
     long_description='',
+    packages=find_packages(where='vxdnes'),
     # ext_modules=ext_modules,
     # setup_requires=['pybind11>=2.5.0'],
     # cmdclass={'build_ext': BuildExt},
