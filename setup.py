@@ -2,34 +2,29 @@ from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
+from pathlib import PurePath
 
 __version__ = '0.0.1'
 
 
-class get_pybind_include(object):
-    """Helper class to determine the pybind11 include path
-
-    The purpose of this class is to postpone importing pybind11
-    until it is actually installed, so that the ``get_include()``
-    method can be invoked. """
-
-    def __str__(self):
-        import pybind11
-        return pybind11.get_include()
-
+import pybind11
 
 ext_modules = [
     Extension(
-        'python_example',
+        'vxdnes.optimizer',
         # Sort input source files to ensure bit-for-bit reproducible builds
         # (https://github.com/pybind/python_example/pull/53)
-        sorted(['src/main.cpp']),
+        sorted(['vxdnes/optimizer/vxdnes.cpp']),
         include_dirs=[
             # Path to pybind11 headers
-            get_pybind_include(),
+            pybind11.get_include()
         ],
         language='c++'
     ),
+    Extension(
+        'vxdnes',
+        ['vxdnes.__init__.py']
+    )
 ]
 
 
@@ -103,15 +98,15 @@ class BuildExt(build_ext):
 
 
 setup(
-    name='python_example',
+    name='vxdnes',
     version=__version__,
     author='Sylvain Corlay',
     author_email='sylvain.corlay@gmail.com',
     url='https://github.com/pybind/python_example',
     description='A test project using pybind11',
     long_description='',
-    ext_modules=ext_modules,
-    setup_requires=['pybind11>=2.5.0'],
-    cmdclass={'build_ext': BuildExt},
+    # ext_modules=ext_modules,
+    # setup_requires=['pybind11>=2.5.0'],
+    # cmdclass={'build_ext': BuildExt},
     zip_safe=False,
 )
