@@ -11,20 +11,16 @@ import pybind11
 
 ext_modules = [
     Extension(
-        'vxdnes.optimizer',
+        'vxdnes.optimizer._optimizer',
         # Sort input source files to ensure bit-for-bit reproducible builds
         # (https://github.com/pybind/python_example/pull/53)
-        sorted(['vxdnes/optimizer/vxdnes.cpp']),
+        sorted(['src/vxdnes/optimizer/optimizer.cpp']),
         include_dirs=[
             # Path to pybind11 headers
             pybind11.get_include()
         ],
         language='c++'
     ),
-    Extension(
-        'vxdnes',
-        ['vxdnes.__init__.py']
-    )
 ]
 
 
@@ -105,9 +101,10 @@ setup(
     url='https://github.com/pybind/python_example',
     description='A test project using pybind11',
     long_description='',
-    packages=find_packages(where='vxdnes'),
-    # ext_modules=ext_modules,
-    # setup_requires=['pybind11>=2.5.0'],
-    # cmdclass={'build_ext': BuildExt},
+    packages=find_packages(where='src'),
+    package_dir={"": "src"},
+    ext_modules=ext_modules,
+    setup_requires=['pybind11>=2.5.0'],
+    cmdclass={'build_ext': BuildExt},
     zip_safe=False,
 )

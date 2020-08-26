@@ -6,7 +6,7 @@ int add(int i, int j) {
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(optimizer, m) {
+PYBIND11_MODULE(_optimizer, m) {
     m.doc() = R"pbdoc(
         Pybind11 example plugin
         -----------------------
