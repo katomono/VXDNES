@@ -32,9 +32,5 @@ PYBIND11_MODULE(python_example, m) {
         Some other explanation about the subtract function.
     )pbdoc");
 
-#ifdef VERSION_INFO
-    m.attr("__version__") = VERSION_INFO;
-#else
     m.attr("__version__") = "dev";
-#endif
 }
